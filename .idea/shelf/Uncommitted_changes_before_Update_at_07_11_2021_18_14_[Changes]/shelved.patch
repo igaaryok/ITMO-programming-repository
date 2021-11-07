@@ -1,0 +1,146 @@
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1636297659655)
++++ b/.idea/vcs.xml	(date 1636297659655)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1636297664418)
++++ b/.idea/.gitignore	(date 1636297664418)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
++# Editor-based HTTP Client requests
++/httpRequests/
+Index: WordCount/main.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/WordCount/main.c b/WordCount/main.c
+new file mode 100644
+--- /dev/null	(date 1633786765559)
++++ b/WordCount/main.c	(date 1633786765559)
+@@ -0,0 +1,63 @@
++#include <stdio.h>
++#include <string.h>
++#include <ctype.h>
++
++int lines(char *location) {
++    FILE *file = fopen(location, "r");
++    int line_count = 1;
++    while (!feof(file)) {
++        if (fgetc(file) == '\n') line_count++;
++    }
++    return line_count;
++
++}
++
++
++int bytes(char *location) {
++    FILE *file = fopen(location, "rb");
++    int bin_count = 0;
++    while (fgetc(file) != EOF) {
++        bin_count++;
++    }
++    return bin_count;
++
++
++}
++
++int words(char *location) {
++    FILE *file = fopen(location, "rb");
++    int word_count = 0;
++    char first_read_letter = '\0';
++    while (!feof(file)) {
++        char second_read_letter = fgetc(file);
++        if (!isspace(second_read_letter)) {
++            if (first_read_letter == '\0' || isspace(first_read_letter)) word_count++;
++        }
++        first_read_letter = second_read_letter;
++    }
++    return word_count;
++}
++
++
++int main(int argc, char **argv) {
++    if (argc == 3) {
++        FILE *file = fopen(argv[2], "r");
++        if (file == 0) {
++            printf("Warning: no file '%s'", argv[2]);
++        } else if ((strcmp(argv[1], "--lines") == 0) || (strcmp(argv[1], "-l") == 0)) {
++            printf("Number of lines: %d", lines(argv[2]));
++
++        } else if ((strcmp(argv[1], "--bytes") == 0) || (strcmp(argv[1], "-c") == 0)) {
++            printf("File size: %d bytes", bytes(argv[2]));
++        } else if ((strcmp(argv[1], "--words") == 0) || (strcmp(argv[1], "-w") == 0)) {
++            printf("Number of words: %d", words(argv[2]));
++        } else {
++            printf("Wrong format: [--lines/--words/--bytes] [File name]");
++        }
++    } else {
++        printf("Wrong format: [--lines/--words/--bytes] [File name]");
++    }
++
++    return 0;
++}
++
+Index: .idea/ITMO-programming-repository.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/ITMO-programming-repository.iml b/.idea/ITMO-programming-repository.iml
+new file mode 100644
+--- /dev/null	(date 1636297659608)
++++ b/.idea/ITMO-programming-repository.iml	(date 1636297659608)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="CPP_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1636297659623)
++++ b/.idea/modules.xml	(date 1636297659623)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/ITMO-programming-repository.iml" filepath="$PROJECT_DIR$/.idea/ITMO-programming-repository.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
